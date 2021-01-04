@@ -16,9 +16,13 @@
  
 //#include <arduino.h> // Won't need this
 
+// Define the led
+const int led = 13;
+
 //Random number Variables
-long randNum = 0;
-long randLED = 0;
+int randTime = 0;
+
+// long randLED = 0;
 
 unsigned long previousMillis = 0;
 
@@ -31,13 +35,26 @@ void setup(){
     // randomSeed() will then shuffle the random function.
 	
 	randomSeed(analogRead(A0));	
+	// Setup the LED
+	pinMode(led, OUTPUT);
 	
-	// Setup the LEDS
 	
 }
 
 void loop(){
-	
+	// Each time the loop starts i should pick a random amount of time 
+	// to light the LED 
+	int randTime = random(1001)
+	int randOFF = random(1001)
+	// If 
+	while (milis - previousMillis) = randTime{
+		digitalWrite (led, HIGH);
+	}
+	if (milis - previousMillis) = randOff{
+		digitalWrite (led, LOW);
+	}
+		// Somehow I don't think this will work.
+		// lets try this in TinkerCad
 }
 
  
