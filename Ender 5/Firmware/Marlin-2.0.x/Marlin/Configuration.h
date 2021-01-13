@@ -87,13 +87,13 @@
  */
 
 // Show the Marlin bootscreen on startup. ** ENABLE FOR PRODUCTION **
-#define SHOW_BOOTSCREEN // PDH - Disabled, no display
+#define SHOW_BOOTSCREEN 
 
 // Show the bitmap in Marlin/_Bootscreen.h on startup.
-#define SHOW_CUSTOM_BOOTSCREEN   // PDH - Disabled, no display
+#define SHOW_CUSTOM_BOOTSCREEN   
 
 // Show the bitmap in Marlin/_Statusscreen.h on the status screen.
-#define CUSTOM_STATUS_SCREEN_IMAGE // PDH - Disabled no display
+#define CUSTOM_STATUS_SCREEN_IMAGE 
 
 // @section machine
 
@@ -133,7 +133,7 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "Ender-5 With MKS Gen L v2.0 and TMC2130 StandAlone " // PDH
+#define CUSTOM_MACHINE_NAME "Ender-5 With MKS Gen L v2.0 and TMC2130 SPI" // PDH
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
