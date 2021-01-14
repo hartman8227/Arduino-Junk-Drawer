@@ -14,7 +14,7 @@
  * 
  */
  
-//#include <arduino.h> // Won't need this
+#include <arduino.h> // Won't need this
 
 // Define the led
 const int led = 13;
@@ -45,8 +45,8 @@ void setup(){
 void loop(){
 	// Each time the loop starts i should pick a random amount of time 
 	// to light the LED 
-	int randTime = random(1001);
-	int randOFF = random(1001);
+	int randTime = random(500, 1001);
+	int randOFF = random(500, 1001);
         clock = millis;
 	// If 
 	while (clock - previousMillis >= randTime) {
