@@ -53,17 +53,28 @@ L293 motor_2 (m2_en, m2_fw, m2_rw);
  const int echo = 30;
 
  // Setup Timer
+
+ // Random Number Generator
+
+ long randomtime;
+ int randomnum;
  
 
 void setup() {
   // Initilize Random Number Generator
+ randomSeed(analogRead(A0));
 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  randomtime = random(500, 1500);
+  randomnum = random (1, 5);
+  
+  
 }
+
 // Need to write this section
+
 //void ranging(){
 //
 //}
@@ -99,4 +110,25 @@ void turn_right(){
   motor_3.back(125);
   motor_4.back(125);
 
+}
+
+void action_select(long delay_time){
+  switch (randomnum){
+    case 1:
+      forward();
+      
+      break;
+    case 2:
+      reverse();
+      
+      break;
+    case 3:
+      turn_left();
+      
+      break;
+    case 4: 
+      turn_right();
+      
+      break; 
+  }
 }
