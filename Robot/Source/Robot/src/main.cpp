@@ -59,25 +59,27 @@ L293 motor_2 (m2_en, m2_fw, m2_rw);
  long randomtime;
  int randomnum;
  
+ // Program Functions
 
-void setup() {
-  // Initilize Random Number Generator
- randomSeed(analogRead(A0));
+ //Need to check out the New Ping library
 
+int ranging(){
+ float duration;
+ float distance;
+ digitalWrite(trig, LOW);
+ delayMicroseconds(2);
+ digitalWrite(trig, HIGH);
+ delayMicroseconds(10);
+ digitalWrite(trig, LOW);
+
+ duration = pulseIn(echo, HIGH);
+ distance = (duration /2) * 0.0343;
+ return distance;
+ 
 }
 
-void loop() {
-  randomtime = random(500, 1500);
-  randomnum = random (1, 5);
-  
-  
-}
 
-// Need to write this section
-
-//void ranging(){
-//
-//}
+// Motor Strapping
 
 void forward(){
   motor_1.forward(255);
@@ -132,3 +134,21 @@ void action_select(long delay_time){
       break; 
   }
 }
+
+// SYSTEM FUNCTIONS
+
+void setup() {
+  // Initilize Random Number Generator
+ randomSeed(analogRead(A0));
+ pinMode(trig, OUTPUT);
+ pinMode(echo, INPUT);
+
+}
+
+void loop() {
+  randomtime = random(500, 1500);
+  randomnum = random (1, 5);
+  
+  
+}
+
