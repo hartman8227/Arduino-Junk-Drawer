@@ -78,6 +78,28 @@ int ranging(){
  
 }
 
+// Thank you Edgar Bonnet - https://arduino.stackexchange.com/questions/12915/timer-function-without-the-use-of-a-library
+//Call This timer function like this.
+/* void loop() {
+    static unsigned long previousMillis1;
+    static unsigned long previousMillis2;
+    static unsigned long previousMillis3;
+
+    if (timer(previousMillis1, 1000)) Serial.println(1);
+    if (timer(previousMillis2, 2000)) Serial.println(2);
+    if (timer(previousMillis3, 3000)) Serial.println(3);
+} */
+bool timer(unsigned long &last_time, unsigned long period)
+{
+  unsigned long now = millis();
+  if (now - last_time >= period) {
+    last_time = now;
+    return true;
+  }
+  return false;
+
+
+}
 
 // Motor Strapping
 
