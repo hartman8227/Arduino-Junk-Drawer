@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <L293.h>
-
+#include <NewPing.h>
 /* **************************
   *  Robot Command Software Version 0.0.01
   *  Copyright 2021
@@ -51,8 +51,9 @@ L293 motor_2 (m2_en, m2_fw, m2_rw);
 
  const int trig = 6;
  const int echo = 30;
-
- // Setup Timer
+ NewPing sonar(trig, echo, 200);
+ unsigned int pingSpeed = 50;
+ unsigned long pingTimer;
 
  // Random Number Generator
 
@@ -61,22 +62,7 @@ L293 motor_2 (m2_en, m2_fw, m2_rw);
  
  // Program Functions
 
- //Need to check out the New Ping library
 
-int ranging(){
- float duration;
- float distance;
- digitalWrite(trig, LOW);
- delayMicroseconds(2);
- digitalWrite(trig, HIGH);
- delayMicroseconds(10);
- digitalWrite(trig, LOW);
-
- duration = pulseIn(echo, HIGH);
- distance = (duration /2) * 0.0343;
- return distance;
- 
-}
 
 // Thank you Edgar Bonnet - https://arduino.stackexchange.com/questions/12915/timer-function-without-the-use-of-a-library
 //Call This timer function like this.
@@ -157,6 +143,24 @@ void action_select(long delay_time){
   }
 }
 
+void ping(){
+  if (millis() >= pingTimer) {   // pingSpeed milliseconds since last ping, do another ping.
+    pingTimer += pingSpeed;      // Set the next ping time.
+    sonar.ping_timer(echoCheck); // Send out the ping, calls "echoCheck" function every 24uS where you can check the ping status.
+  }
+}
+
+  void echoCheck() { // Timer2 interrupt calls this function every 24uS where you can check the ping status.
+  // Don't do anything here!
+  if (sonar.check_timer()) { // This is how you check to see if the ping was received.
+    // Here's where you can add code.
+    Serial.print("Ping: ");
+    Serial.print(sonar.ping_result / US_ROUNDTRIP_CM); // Ping returned, uS result in ping_result, convert to cm with US_ROUNDTRIP_CM.
+    Serial.println("cm");
+  }
+  // Don't do anything here!
+}
+}
 // SYSTEM FUNCTIONS
 
 void setup() {
@@ -164,12 +168,13 @@ void setup() {
  randomSeed(analogRead(A0));
  pinMode(trig, OUTPUT);
  pinMode(echo, INPUT);
-
+ pingTimer = millis();
 }
 
 void loop() {
   randomtime = random(500, 1500);
   randomnum = random (1, 5);
+  
   
   
 }
