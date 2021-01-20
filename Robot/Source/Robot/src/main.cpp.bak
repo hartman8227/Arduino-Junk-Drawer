@@ -122,6 +122,12 @@ void turn_right(){
 
 }
 
+void full_stop(){
+  motor_1.stop();
+  motor_2.stop();
+  motor_3.stop();
+  motor_4.stop();
+}
 void action_select(long delay_time){
   switch (randomnum){
     case 1:
@@ -129,7 +135,10 @@ void action_select(long delay_time){
       
       break;
     case 2:
-      reverse();
+      while timer() == true{
+        reverse();  
+      }
+      
       
       break;
     case 3:
@@ -144,13 +153,10 @@ void action_select(long delay_time){
 }
 
 void ping(){
-  if (millis() >= pingTimer) {   // pingSpeed milliseconds since last ping, do another ping.
-    pingTimer += pingSpeed;      // Set the next ping time.
-    sonar.ping_timer(echoCheck); // Send out the ping, calls "echoCheck" function every 24uS where you can check the ping status.
-  }
+  
 }
 
-  void echoCheck() { // Timer2 interrupt calls this function every 24uS where you can check the ping status.
+  bool echoCheck() { // Timer2 interrupt calls this function every 24uS where you can check the ping status.
   // Don't do anything here!
   if (sonar.check_timer()) { // This is how you check to see if the ping was received.
     int range;
@@ -159,7 +165,9 @@ void ping(){
     // Serial.print(sonar.ping_result / US_ROUNDTRIP_CM); // Ping returned, uS result in ping_result, convert to cm with US_ROUNDTRIP_CM.
     // Serial.println("cm");
     range = sonar.ping_result / US_ROUNDTRIP_CM;
-    if range <= 10
+    if range() <= 10{
+      return true;
+    }
 
 
   }
@@ -178,7 +186,11 @@ void setup() {
 void loop() {
   randomtime = random(500, 1500);
   randomnum = random (1, 5);
-  
+  // 
+  if (millis() >= pingTimer) {   // pingSpeed milliseconds since last ping, do another ping.
+    pingTimer += pingSpeed;      // Set the next ping time.
+    sonar.ping_timer(echoCheck); // Send out the ping, calls "echoCheck" function every 24uS where you can check the ping status.
+  }
   
   
 }
