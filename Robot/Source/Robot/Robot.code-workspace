@@ -3,7 +3,19 @@
 		{
 			"name": "Robot",
 			"path": "."
+		},
+		{
+			"name": "Blink",
+			"path": "..\\..\\..\\..\\..\\PlatformIO\\Projects\\Blink"
+		},
+		{
+			"name": "hcsr04_new_ping",
+			"path": "..\\..\\..\\..\\..\\PlatformIO\\Projects\\hcsr04_new_ping"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"*.bak": "cpp"
+		}
+	}
 }
